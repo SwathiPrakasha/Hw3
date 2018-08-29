@@ -20,8 +20,8 @@ def fileOpen(fileName):
 
 	for line in inputFile:
 		linecount += 1
-		line = line.lower() 								# Conversion to lowercase
-		line = re.sub(r'[^a-zA-Z]',' ', line)       	#Removal of Non-ASCII characters
+		line = line.lower() 							# Conversion to lowercase
+		line = re.sub(r'[^a-zA-Z]',' ', line)        	                        #Removal of Non-ASCII characters
 		line = line.split(' ',1)[1]						#removal of 1st word of line, which is ID a non-word
 		words = line.split()							#spliting the words by space
 		words.sort()
