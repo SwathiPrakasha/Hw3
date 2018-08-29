@@ -161,14 +161,14 @@ def KernighanTable():
 
 class correction:
 	def __init__(self, candidate, correctLetter, errorLetter, x, w,prob1,prob2):
-		self.candidate		= candidate
+		self.candidate	   = candidate
 		self.correctLetter = correctLetter
-		self.errorLetter	= errorLetter
-		self.x					  =  x
-		self.w					 = w
-		self.p_x_Given_w  =prob1
-		self.p_word			 =prob2
-		self.final				 = (10**9)*(prob1*prob2)
+		self.errorLetter   = errorLetter
+		self.x		   = x
+		self.w		   = w
+		self.p_x_Given_w   = prob1
+		self.p_word	   = prob2
+		self.final	   = (10**9)*(prob1*prob2)
 
 def spellCheck(wd):
 	#unserializing the previously pickled object.
@@ -191,10 +191,10 @@ def spellCheck(wd):
 	def insertionFun(word):
 		#delete operation on  a typo word.
 		for pos in range(len(word)):
-			str = word[:pos] + word[pos+1:]                                #stripping the letter inthe position 'pos'
+			str = word[:pos] + word[pos+1:]                                 #stripping the letter inthe position 'pos'
 			if str in wordCorpus:
 				c = '-'
-				e = word[pos]							#typo letter
+				e = word[pos]					        #typo letter
 				x = word[pos-1:pos]+word[pos]
 				w = word[pos-1]
 				#deleted letter is from the typo, means addition of letter in correct word, so have to look up in the kernighan add table
@@ -203,11 +203,14 @@ def spellCheck(wd):
 				finalProb =0
 				str = str.replace('<','')
 				str = str.replace('>','')
-				if w == '<':									#handling the error in the begging of the word
+				if w == '<':						                     #handling the error in the begging of the word
 					x = word[pos]
 					w = '#'
 				possibleWords.append(correction(str, c, e, x, w, prob1,prob2))               #in delete, the correct letter is '-'
 
+				
+				
+				
 	'''This function take a word, looks for any deletion of letter in a misspelled word, by adding every possible letter in every posiible position  and
 	validate it is a valid word against the corpus and Returns a possible correct word and its probability'''
 	def deletionFun(word):
@@ -218,7 +221,7 @@ def spellCheck(wd):
 				if str in wordCorpus:
 					c = char
 					e = '-'
-					x = str[pos-1]									#x
+					x = str[pos-1]						 #x
 					w = str[pos-1:pos+1]					 #xy
 					y = str[pos]
 					#adding letter to the typo, means a letter was deleted by mistake from a correct word, so have to look up in the kernighan del table
@@ -227,8 +230,10 @@ def spellCheck(wd):
 					finalProb =0
 					str = str.replace('<','')
 					str = str.replace('>','')
-					possibleWords.append(correction(str, c ,e ,x, w, prob1,prob2))               #in delete, the correct letter is '-'
+					possibleWords.append(correction(str, c ,e ,x, w, prob1,prob2))      #in delete, the correct letter is '-'
 
+					
+					
 	'''This function take a word, looks for any deletion of letter in a misspelled word, by adding every possible letter in every posiible position  and
 	validate it is a valid word against the corpus and Returns a possible correct word and its probability'''
 	def transposeFun(word):
@@ -249,6 +254,8 @@ def spellCheck(wd):
 				str = str.replace('>','')
 				possibleWords.append(correction(str, c, e, e, w, prob1,prob2))               #in delete, the correct letter is '-'
 
+				
+				
 	'''This function take a word, looks for any deletion of letter in a misspelled word, by adding every possible letter in every posiible position  and
 	validate it is a valid word against the corpus and Returns a possible correct word and its probability'''
 	def subFun(word):
@@ -269,6 +276,7 @@ def spellCheck(wd):
 					str = str.replace('>','')
 					possibleWords.append(correction(str, c ,e ,x, w, prob1,prob2))               #in delete, the correct letter is '-'
 
+					
 	if word not in wordCorpus:
 		insertionFun(word)
 		deletionFun(word)
@@ -285,6 +293,8 @@ def spellCheck(wd):
 		print(wd ,"  is correct word according to corpus")
 	print(100*'-')
 
+	
+	
 import sys
 if len(sys.argv)<2:
     print("Enter a word")
