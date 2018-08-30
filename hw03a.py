@@ -72,7 +72,7 @@ def fileOpen(fileName):
 	for letter in ascLetter2:
 		print('{:5}{:>10}'.format(letter, bigram[letter]))
 
-	#creating the singleton object
+	#creating the singleton object, oneOnly class is defined in hw03c.py file
 	obj =oneOnly(wordcount, unigram, bigram)
 
 	#serializing the object created above through pickle
