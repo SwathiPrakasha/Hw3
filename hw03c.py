@@ -1,3 +1,5 @@
+''' This file is executed to create sington class. The oneOnly class is called from hw03a.py and singleton object will be created. 
+singleton class is class that has only one object to it. '''
 
 #import singletonClass
 class oneOnly:
